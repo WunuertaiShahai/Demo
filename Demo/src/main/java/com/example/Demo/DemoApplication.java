@@ -12,7 +12,7 @@ public class DemoApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(DemoApplication.class, args);
 	}
-	// browser ADD
+	// eclipse MOD
     @Bean // 在启动类中直接声明Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
