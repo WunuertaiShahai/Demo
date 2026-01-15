@@ -1,0 +1,160 @@
+/* ==================== 学生信息管理系统 - 优化样式版 ==================== */
+/* 重置默认样式，确保各浏览器显示一致 */
+* { 
+    margin: 0; /* 清除所有元素默认外边距 */
+    padding: 0; /* 清除所有元素默认内边距 */
+    box-sizing: border-box; /* 设置盒模型为border-box，便于尺寸计算 */
+}
+
+/* CSS变量定义区：定义项目中可复用的颜色、尺寸等值 */
+:root {
+    --primary-blue: #1a56db; /* 主蓝色，用于按钮、链接等强调元素 */
+    --primary-dark: #1e3a8a; /* 深蓝色，用于按钮悬停状态 */
+    --text-primary: #1f2937; /* 主要文字颜色 */
+    --text-secondary: #6b7280; /* 次要文字颜色 */
+    --border-color: #e5e7eb; /* 默认边框颜色 */
+    --white: #ffffff; /* 白色 */
+    --radius: 0.5rem; /* 默认圆角大小 */
+}
+
+/* 页面基础样式 */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Microsoft YaHei', sans-serif; /* 设置字体族 */
+    line-height: 1.6; /* 设置行高，改善文本可读性 */
+    color: var(--text-primary); /* 设置默认文字颜色 */
+    background-color: var(--primary-blue); /* 设置默认背景为蓝色 */
+    min-height: 100vh; /* 确保页面高度至少为整个视口高度 */
+    margin: 0; /* 清除默认外边距 */
+}
+
+/* 登录页面专用背景 */
+body.login-page {
+    background: url('/images/pic27.png') center/cover no-repeat; /* 设置背景图片：居中、覆盖、不重复 */
+}
+
+
+/* 登录容器：使用Flexbox布局使内容垂直水平居中 */
+.login-container {
+    min-height: 100vh; /* 最小高度为整个视口高度 */
+    display: flex; /* 启用Flexbox布局 */
+    align-items: center; /* 垂直居中对齐子元素 */
+    justify-content: center; /* 水平居中对齐子元素 */
+    padding: 1rem; /* 添加内边距，在移动端避免内容贴边 */
+}
+
+/* 登录卡片：包含登录表单的白色卡片 */
+.login-card {
+    background: var(--white); /* 设置卡片背景为白色 */
+    border-radius: var(--radius); /* 设置圆角 */
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1); /* 添加阴影效果，提升层次感 */
+    padding: 2rem; /* 设置内边距 */
+    width: 100%; /* 宽度充满父容器 */
+    max-width: 400px; /* 最大宽度限制为400px，避免在大屏幕上过宽 */
+}
+
+/* 登录头部区域：包含系统标题和副标题 */
+.login-header {
+    text-align: center; /* 文字居中对齐 */
+    margin-bottom: 2rem; /* 底部外边距，与下方表单区域分隔 */
+}
+
+/* 系统主标题样式 */
+.system-title {
+    font-size: 1.5rem; /* 字体大小 */
+    font-weight: 600; /* 字体粗细 */
+    color: var(--text-primary); /* 文字颜色 */
+    margin-bottom: 0.5rem; /* 底部外边距，与副标题分隔 */
+}
+
+/* 系统副标题样式 */
+.system-subtitle {
+    color: var(--text-secondary); /* 使用次要文字颜色 */
+    font-size: 0.875rem; /* 较小的字体大小 */
+}
+
+/* 表单项分组：每个表单项的容器 */
+.form-group {
+    margin-bottom: 1.5rem; /* 底部外边距，分隔每个表单项 */
+}
+
+/* 表单标签样式 */
+.form-label {
+    display: block; /* 设置为块级元素，占据整行 */
+    font-weight: 500; /* 字体粗细 */
+    margin-bottom: 0.5rem; /* 底部外边距，与输入框分隔 */
+}
+
+/* 文本输入框基础样式 */
+.form-input {
+    width: 100%; /* 宽度充满父容器 */
+    padding: 0.75rem; /* 内边距，控制输入文字与边框的距离 */
+    border: 1px solid var(--border-color); /* 设置边框 */
+    border-radius: var(--radius); /* 设置圆角 */
+    font-size: 1rem; /* 设置字体大小 */
+    transition: all 0.2s; /* 为所有属性添加过渡动画效果 */
+}
+
+/* 输入框获得焦点时的样式 */
+.form-input:focus {
+    outline: none; /* 移除浏览器默认的焦点轮廓 */
+    border-color: var(--primary-blue); /* 焦点时改变边框颜色为主蓝色 */
+    box-shadow: 0 0 0 3px rgba(26, 86, 219, 0.1); /* 添加发光效果，突出焦点状态 */
+}
+
+/* 按钮基础样式 */
+.btn {
+    display: block; /* 设置为块级元素，默认占满整行 */
+    width: 100%; /* 宽度充满父容器 */
+    padding: 0.75rem; /* 内边距，控制按钮大小 */
+    border: none; /* 移除默认边框 */
+    border-radius: var(--radius); /* 设置圆角 */
+    font-size: 1rem; /* 设置字体大小 */
+    font-weight: 500; /* 设置字体粗细 */
+    cursor: pointer; /* 鼠标悬停时显示手型光标，提示可点击 */
+    transition: all 0.2s; /* 为所有属性添加过渡动画效果 */
+}
+
+/* 主要按钮变体样式 */
+.btn-primary {
+    background: var(--primary-blue); /* 设置背景色为主蓝色 */
+    color: var(--white); /* 设置文字颜色为白色 */
+}
+
+/* 主要按钮悬停状态样式 */
+.btn-primary:hover {
+    background: var(--primary-dark); /* 悬停时加深背景色，提供交互反馈 */
+    transform: translateY(-1px); /* 轻微向上移动，产生立体效果 */
+}
+
+/* 响应式设计：针对小屏幕设备的调整 */
+@media (max-width: 768px) {
+    .login-card {
+        margin: 1rem; /* 在小屏幕上添加外边距 */
+        padding: 1.5rem; /* 适当减少内边距 */
+    }
+    
+    .system-title {
+        font-size: 1.25rem; /* 在小屏幕上适当缩小主标题字体 */
+    }
+}
+
+/* 登录验证用 START */
+/* 错误消息样式 */
+.error-message {
+    background-color: #fee;
+    color: #c33;
+    padding: 0.75rem;
+    border-radius: var(--radius);
+    margin-bottom: 1rem;
+    border: 1px solid #fcc;
+}
+
+/* 输入验证样式 */
+.form-input:invalid {
+    border-color: #f00;
+}
+
+.form-input:valid {
+    border-color: var(--border-color);
+}
+/* 登录验证用 END */
