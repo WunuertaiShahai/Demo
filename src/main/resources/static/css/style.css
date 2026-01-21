@@ -1,0 +1,252 @@
+/* ==================== 学生信息系统 - 样式 ==================== */
+/* 基础重置 */
+* { 
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* CSS变量定义 */
+:root {
+    --primary-blue: #1a56db;
+    --primary-dark: #1e3a8a;
+    --text-primary: #1f2937;
+    --text-secondary: #6b7280;
+    --border-color: #e5e7eb;
+    --white: #ffffff;
+    --radius: 0.5rem;
+}
+
+/* 页面基础样式 */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Microsoft YaHei', sans-serif;
+    line-height: 1.6;
+    color: var(--text-primary);
+    background-color: var(--primary-blue);
+    min-height: 100vh;
+    margin: 0;
+}
+
+/* 登录页专用样式 */
+body.login-page {
+    background: url('/images/pic55.png') center/cover no-repeat;
+}
+
+.login-container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+}
+
+.login-card {
+    background: var(--white);
+    border-radius: var(--radius);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    padding: 2rem;
+    width: 100%;
+    max-width: 400px;
+}
+
+.login-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.system-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+}
+
+.system-subtitle {
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-label {
+    display: block;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+}
+
+.form-input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    font-size: 1rem;
+    transition: all 0.2s;
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: var(--primary-blue);
+    box-shadow: 0 0 0 3px rgba(26, 86, 219, 0.1);
+}
+
+.btn {
+    display: block;
+    width: 100%;
+    padding: 0.75rem;
+    border: none;
+    border-radius: var(--radius);
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn-primary {
+    background: var(--primary-blue);
+    color: var(--white);
+}
+
+.btn-sub {
+    width: 140px;
+    background-color: #1e3a8a;
+}
+
+.btn-primary:hover {
+    background: var(--primary-dark);
+    transform: translateY(-1px);
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .login-card {
+        margin: 1rem;
+        padding: 1.5rem;
+    }
+    
+    .system-title {
+        font-size: 1.25rem;
+    }
+}
+
+/* 输入框验证样式 */
+.form-input.error {
+    border-color: #dc3545;
+    box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25);
+}
+
+.form-input.valid {
+    border-color: #28a745;
+}
+
+.field-error-message {
+    color: #dc3545;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+    display: none;
+}
+
+.field-error-message.show {
+    display: block;
+}
+
+/* 主布局样式 */
+.navbar-custom {
+    background-color: #1e3a8a;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 56px;
+    z-index: 1001;
+    padding: 1rem 2rem;
+}
+
+.sidebar-container {
+    position: fixed;
+    top: 56px;
+    left: 0;
+    width: 200px;
+    height: calc(100vh);
+    background-color: #1e9a8a;
+    z-index: 1000;
+    overflow-y: auto;
+}
+
+.sidebar-menu {
+    padding: 0;
+    height: 100%;
+}
+
+.sidebar-menu .nav-link {
+    color: white;
+    padding: 1rem;
+    border-bottom: 1px solid rgba(45, 79, 161, 0.3);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: block;
+    background-color: transparent;
+}
+
+.sidebar-menu .nav-link.active {
+    background-color: #2d4fa1 !important;
+    font-weight: bold !important;
+    box-shadow: inset 3px 0 0 rgba(255, 255, 255, 0.3) !important;
+}
+
+.sidebar-menu .nav-link:first-child {
+    font-weight: bold;
+}
+
+.sidebar-menu .nav-link.active:hover {
+    background-color: #1e3a8a;
+}
+
+.sidebar-menu .nav-link:hover {
+    background-color: #2d4fa1;
+    color: white;
+    transform: translateX(5px);
+}
+
+.main-content {
+    padding: 2rem;
+    margin-top: 50px;
+    margin-left: 200px;
+    width: calc(100% - 200px);
+}
+.test-area {
+    margin-left: 200px;
+}
+
+.welcome-header {
+    background: linear-gradient(135deg, #1a56db, #1e3a8a);
+    color: white;
+    padding: 0rem;
+    border-radius: 10px;
+    margin-bottom: 2rem;
+}
+
+.stat-card {
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    transition: transform 0.2s;
+    cursor: pointer;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+}
+
+.user-welcome {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    display: inline-block;
+}
+
+.sub-content {
+    margin-top: 75px;
+    margin-left: 200px;
+}

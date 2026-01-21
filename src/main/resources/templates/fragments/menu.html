@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+    <!-- 左侧菜单片段 -->
+    <div th:fragment="sidebarMenu" class="sidebar-menu">
+        <div class="d-flex flex-column">
+            <!-- 移除默认的active类 -->
+            <a href="javascript:void(0)" class="nav-link" onclick="showFeature(event, 'dashboard')">首页概览</a>
+            <a href="javascript:void(0)" class="nav-link" onclick="showFeature(event, 'student')">学生信息管理</a>
+            <a href="javascript:void(0)" class="nav-link" onclick="showFeature(event, 'grade')">成绩管理</a>
+            <a href="javascript:void(0)" class="nav-link" onclick="showFeature(event, 'course')">课程管理</a>
+            <a href="javascript:void(0)" class="nav-link" onclick="showFeature(event, 'class')">班级管理</a>
+            <a href="javascript:void(0)" class="nav-link" onclick="showFeature(event, 'settings')">系统设置</a>
+            <a href="javascript:void(0)" class="nav-link" onclick="popup()">test</a>
+        </div>
+    </div>
+
+    <script th:src="@{/js/common.js}"></script>
+</body>
+</html>

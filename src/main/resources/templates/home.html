@@ -1,0 +1,49 @@
+<!-- home.html - 修复登录表单 -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>学生信息管理系统</title>
+    <link th:href="@{/css/style.css}" rel="stylesheet">
+</head>
+<body class="login-page">
+    <div class="login-container">
+        <div class="login-card">
+            <div class="login-header">
+                <div class="system-title">学生信息管理系统</div>
+                <div class="system-subtitle">Student Affairs Office</div>
+            </div>
+            
+            <!-- 错误消息显示 -->
+            <div th:if="${param.error}" class="alert alert-danger">
+                用户名或密码错误！
+            </div>
+            <div th:if="${param.logout}" class="alert alert-success">
+                您已成功退出登录！
+            </div>
+            
+            <!-- 修复登录表单：使用Spring Security的默认登录URL -->
+            <form th:action="@{/perform_login}" method="post" class="login-form" id="loginForm">
+                <div class="form-group">
+                    <label class="form-label">用户名</label>
+                    <input name="username" type="text" class="form-input" id="usernameInput" 
+                           placeholder="请输入用户名" required>
+                    <div class="field-error-message" id="usernameError">用户名不能为空</div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">密码</label>
+                    <input name="password" type="password" class="form-input" id="passwordInput" 
+                           placeholder="请输入密码" required>
+                    <div class="field-error-message" id="passwordError">密码不能为空</div>
+                </div>
+                
+                <button type="submit" class="btn btn-primary">登录</button>
+                <p>还没有账号？<a th:href="@{/auth/register}">点击这里注册</a></p>
+            </form>
+        </div>
+    </div>
+    
+    <script th:src="@{/js/login.js}"></script>
+</body>
+</html>

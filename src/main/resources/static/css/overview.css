@@ -1,0 +1,5 @@
+.body {
+    background-color: #4a4b8c; /* 暗蓝色背景 */
+    color: #4a4b8c; /* 浅色文字确保可读性 */
+    min-height: 100vh;
+}

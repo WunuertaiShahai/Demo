@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <style>
+        </style>
+    </head>
+    <body>
+        <header th:fragment="systemHeader">
+            <!-- 导航栏 -->
+            <nav class="navbar navbar-expand-lg navbar-dark navbar-custom extra-nav">
+                <div class="container-fluid">
+                    <span class="navbar-brand">学生信息管理系统</span>
+                    <div class="navbar-nav ms-auto">
+                        <a class="nav-link" th:href="@{/logout}">退出登录</a>
+                    </div>
+                </div>
+            </nav>
+        </header>
+    </body>
+</html>
