@@ -1,5 +1,6 @@
 package com.example.Demo.controller;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.example.Demo.entity.College;
+import com.example.Demo.entity.GradeYear;
+import com.example.Demo.entity.Major;
 import com.example.Demo.service.StudentService;
 
 @Controller
@@ -28,6 +32,16 @@ public class StudentController {
 
 	@GetMapping("/management/add")
 	public String showAddStudentForm(Model model) {
+
+		List<GradeYear> gradeList = studentService.findGradeList();
+		model.addAttribute("gradeList", gradeList);
+
+		List<College> collegeList = studentService.findCollegeList();
+		model.addAttribute("collegeList", collegeList);
+
+		List<Major> majorList = studentService.findMajorList();
+		model.addAttribute("majorList", majorList);
+
 		model.addAttribute("pageTitle", "添加新学生");
 		return "management/add_student";
 	}
