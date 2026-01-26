@@ -1,31 +1,49 @@
-package com.example.Demo.dto;
+package com.example.Demo.entity;
 
 import java.time.LocalDateTime;
 
-public class ClassManagementDto {
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "class")
+public class Class {
+
+	@Id
+	@Column(name = "class_id", unique = true, nullable = false)
 	private String classId;
+
+	@Column(name = "class_name", nullable = false)
 	private String className;
+
+	@Column(name = "college_id")
 	private String collegeId;
+
+	@Column(name = "major_id")
 	private String majorId;
+
+	@Column(name = "grade")
 	private String grade;
-	private Integer studentCount;
+
+	@Column(name = "student_count")
+	private Integer studentCount = 0;
+
+	@Column(name = "created_at", nullable = false)
 	private LocalDateTime createdAt;
+
+	@Column(name = "updated_at", nullable = false)
 	private LocalDateTime updatedAt;
+
+	@Column(name = "is_active")
 	private String isActive;
 
-	// 构造方法
-	public ClassManagementDto() {
-	}
+	@Column(name = "max_student_id")
+	private String maxStudentId;
 
-	public ClassManagementDto(String classId, String className, String collegeId, String majorId, String grade,
-			Integer studentCount, String isActive) {
-		this.classId = classId;
-		this.className = className;
-		this.collegeId = collegeId;
-		this.majorId = majorId;
-		this.grade = grade;
-		this.studentCount = studentCount;
-		this.isActive = isActive;
+	// 构造方法
+	public Class() {
 	}
 
 	public String getClassId() {
@@ -98,5 +116,13 @@ public class ClassManagementDto {
 
 	public void setIsActive(String isActive) {
 		this.isActive = isActive;
+	}
+
+	public String getMaxStudentId() {
+		return maxStudentId;
+	}
+
+	public void setMaxStudentId(String maxStudentId) {
+		this.maxStudentId = maxStudentId;
 	}
 }

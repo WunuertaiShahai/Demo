@@ -20,7 +20,7 @@
     <div class="container-fluid">
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h2>添加新学生</h2>
-            <button class="btn btn-primary btn-sub" onclick="showDashboard()">返回首页</button>
+            <button class="btn btn-primary btn-sub" onclick="showFeature(event, 'dashboard')">返回首页</button>
         </div>
 
         <!-- 消息提示 -->
@@ -36,81 +36,65 @@
         <div class="row">
             <div class="">
                 <div class="form-container">
-                    <form th:action="@{/student/management/add}" method="post">
-                        
-                        
-                        
-                        
-                    <div class="row">
-                        <div class="col-md-6 mb-3">
-                            <label class="form-label">年级</label>
-                            <select class="form-select" name="grade_year" required>
-                                <option value="">请选择年级</option>
-                                <option th:each="grade : ${gradeList}" th:value="${grade.gradeId}" th:text="${grade.gradeName}"></option>
-                            </select>
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            <label class="form-label">学院</label>
-                            <select class="form-select" name="college" required>
-                                <option value="">请选择学院</option>
-                                <option th:each="college : ${collegeList}" th:value="${college.collegeId}" th:text="${college.collegeName}"></option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6 mb-3">
-                            <label class="form-label">专业</label>
-                            <select class="form-select" name="major" required>
-                                <option value="">请选择专业</option>
-                                <option th:each="major : ${majorList}" th:value="${major.majorId}" th:text="${major.majorName}"></option>
-                            </select>
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            <label class="form-label">班级</label>
-                            <input type="text" class="form-control" name="name" required>
-                        </div>
-                    </div>
-                    
-                    
-                    
-                    
+                    <form th:action="@{/student/management/add}" method="post" id="studentForm">
                         <div class="row">
                             <div class="col-md-6 mb-3">
-                                <label class="form-label">学号</label>
-                                <input type="text" class="form-control" name="student_id" required>
+                                <label class="form-label">年级</label>
+                                <select class="form-select" id="grade_year" name="grade_year" required>
+                                    <option th:each="grade : ${gradeList}" th:value="${grade}" th:text="${grade} + '级'" th:selected="${grade == defaultYear}"></option>
+                                </select>
                             </div>
                             <div class="col-md-6 mb-3">
-                                <label class="form-label">姓名</label>
-                                <input type="text" class="form-control" name="name" required>
+                                <label class="form-label">学院</label>
+                                <select class="form-select" id="college" name="college" required>
+                                    <option value="0">请选择学院</option>
+                                    <option th:each="college : ${collegeList}" th:value="${college.collegeId}" th:text="${college.collegeName}"></option>
+                                </select>
                             </div>
                         </div>
-                        
                         <div class="row">
                             <div class="col-md-6 mb-3">
-                                <label class="form-label">性别</label>
-                                <select class="form-select" name="gender" required>
-                                    <option value="">请选择</option>
-                                    <option value="男">男</option>
-                                    <option value="女">女</option>
+                                <label class="form-label">专业</label>
+                                <select class="form-select" id="major" name="major" required>
+                                    <option value="0">请先选择学院</option>
+                                    <option th:each="major : ${majorList}" th:value="${major.majorId}" th:text="${major.majorName}"></option>
                                 </select>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label class="form-label">班级</label>
-                                <input type="text" class="form-control" name="class_id" required>
+                                <select class="form-select" id="class" name="class" required>
+                                    <option value="0">请先选择专业</option>
+                                    <option th:each="class : ${classList}" th:value="${class.classId}" th:text="${class.className}"></option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">学号(自动生成)</label>
+                                <input type="text" class="form-control" id="student_id" name="student_id" required readonly>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">姓名</label>
+                                <input type="text" class="form-control" id="name" name="name" required>
                             </div>
                         </div>
                         
                         <div class="row">
                             <div class="col-md-6 mb-3">
-                                <label class="form-label">专业</label>
-                                <input type="text" class="form-control" name="major" required>
+                                <label class="form-label">生日</label>
+                                <input type="date" class="form-control" id="birthday" name="birthday" min="1900-01-01" 
+                                           th:max="${T(java.time.LocalDate).now().toString()}" 
+                                           th:value="${T(java.time.LocalDate).now().toString()}" required>
                             </div>
                             <div class="col-md-6 mb-3">
-                                <label class="form-label">入学年份</label>
-                                <input type="number" class="form-control" name="enrollment_year" required>
+                                <label class="form-label">性别</label>
+                                <select class="form-select" name="gender" required>
+                                    <option value="0">请选择</option>
+                                    <option value="男">男</option>
+                                    <option value="女">女</option>
+                                </select>
                             </div>
                         </div>
-                        
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <label class="form-label">手机号</label>
@@ -137,10 +121,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <script th:src="@{/js/common.js}"></script>
-    <script>
-        function showDashboard() {
-            window.location.href = '/dashboard';
-        }
-    </script>
+    <script th:src="@{/js/student.js}"></script>
+    <script src="https://cdn.staticfile.org/jquery/3.1.1/jquery.min.js"></script>
 </body>
 </html>

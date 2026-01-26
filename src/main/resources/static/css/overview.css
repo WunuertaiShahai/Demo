@@ -3,3 +3,9 @@
     color: #4a4b8c; /* 浅色文字确保可读性 */
     min-height: 100vh;
 }
+
+.center-header {
+    text-align: center;
+    /* 如果需要垂直方向也居中，可以加上： */
+    /* vertical-align: middle; */
+}

@@ -75,37 +75,35 @@
                                 <th>专业</th>
                                 <th>年级</th>
                                 <th>学生人数</th>
-                                <th>班主任</th>
                                 <th>状态</th>
                                 <th>操作</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr th:each="classObj : ${classList}">
-                                <td th:text="${classObj.classCode}">CS202101</td>
+                                <td th:text="${classObj.classId}">CS202101</td>
                                 <td th:text="${classObj.className}">计算机科学与技术2021级1班</td>
-                                <td th:text="${classObj.major}">计算机科学与技术</td>
+                                <td th:text="${classObj.majorId}">计算机科学与技术</td>
                                 <td th:text="${classObj.grade}">2021</td>
                                 <td>
                                     <span class="badge bg-primary" th:text="${classObj.studentCount}">35</span>
                                 </td>
-                                <td th:text="${classObj.headTeacherName} ?: '未分配'">张教授</td>
                                 <td>
-                                    <span th:if="${classObj.status == 'ACTIVE'}" class="badge bg-success">活跃</span>
-                                    <span th:if="${classObj.status == 'INACTIVE'}" class="badge bg-secondary">未激活</span>
+                                    <span th:if="${classObj.isActive == 'ACTIVE'}" class="badge bg-success">活跃</span>
+                                    <span th:if="${classObj.isActive == 'INACTIVE'}" class="badge bg-secondary">未激活</span>
                                 </td>
                                 <td>
                                     <!-- 修改这里：使用data属性代替直接的事件处理 -->
                                     <button class="btn btn-sm btn-outline-primary me-1 view-class-btn" 
-                                            th:attr="data-class-code=${classObj.classCode}">
+                                            th:attr="data-class-code=${classObj.classId}">
                                         查看
                                     </button>
                                     <button class="btn btn-sm btn-outline-warning me-1 edit-class-btn" 
-                                            th:attr="data-class-id=${classObj.id}">
+                                            th:attr="data-class-id=${classObj.classId}">
                                         编辑
                                     </button>
                                     <button class="btn btn-sm btn-outline-danger delete-class-btn" 
-                                            th:attr="data-class-id=${classObj.id}">
+                                            th:attr="data-class-id=${classObj.classId}">
                                         删除
                                     </button>
                                 </td>
@@ -130,7 +128,7 @@
                             <div class="row">
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label">班级代码 *</label>
-                                    <input type="text" class="form-control" id="classCode" name="classCode" required>
+                                    <input type="text" class="form-control" id="classId" name="classId" required>
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label">班级名称 *</label>
@@ -157,8 +155,8 @@
                                     <select class="form-select" id="headTeacherId" name="headTeacherId">
                                         <option value="">请选择班主任</option>
                                         <option th:each="teacher : ${teachers}" 
-                                                th:value="${teacher.id}" 
-                                                th:text="${teacher.name}">
+                                                th:value="${teacher.teacher_id}" 
+                                                th:text="${teacher.teacher_name}">
                                         </option>
                                     </select>
                                 </div>
@@ -183,8 +181,8 @@
             // 绑定查看班级详情事件
             document.querySelectorAll('.view-class-btn').forEach(button => {
                 button.addEventListener('click', function() {
-                    const classCode = this.getAttribute('data-class-code');
-                    viewClassDetail(classCode);
+                    const classId = this.getAttribute('data-class-code');
+                    viewClassDetail(classId);
                 });
             });
 
@@ -220,13 +218,11 @@
                 .then(response => response.json())
                 .then(data => {
                     document.getElementById('modalTitle').textContent = '编辑班级';
-                    document.getElementById('classId').value = data.id;
-                    document.getElementById('classCode').value = data.classCode;
+                    document.getElementById('classId').value = data.classId;
                     document.getElementById('className').value = data.className;
                     document.getElementById('major').value = data.major;
                     document.getElementById('grade').value = data.grade;
                     document.getElementById('department').value = data.department || '';
-                    document.getElementById('headTeacherId').value = data.headTeacherId || '';
                     new bootstrap.Modal(document.getElementById('classModal')).show();
                 })
                 .catch(error => {
@@ -265,8 +261,8 @@
         }
 
         // 查看班级详情
-        function viewClassDetail(classCode) {
-            window.location.href = '/class/detail/' + classCode;
+        function viewClassDetail(classId) {
+            window.location.href = '/class/detail/' + classId;
         }
 
         // 删除班级

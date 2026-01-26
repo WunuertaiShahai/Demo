@@ -1,64 +1,147 @@
 package com.example.Demo.entity;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "teacher")
 public class Teacher {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+	@Id
+	@Column(name = "teacher_id", unique = true, nullable = false)
+	private String teacherId;
 
-    @Column(name = "teacher_id", unique = true, nullable = false)
-    private String teacherId;
+	@Column(name = "teacher_name", nullable = false)
+	private String teacherName;
 
-    @Column(nullable = false)
-    private String name;
+	@Column(name = "gender")
+	private String gender;
 
-    private String gender;
-    
-    @Column(name = "department_id")
-    private String departmentId;
-    
-    private String title;
-    private String phone;
-    private String email;
-    private String office;
-    
-    @Column(name = "is_active")
-    private Boolean isActive = true;
+	@Column(name = "birth_date")
+	private String birthDate;
 
-    // 构造方法
-    public Teacher() {}
+	@Column(name = "title")
+	private String title;
 
-    // Getter和Setter方法
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
+	@Column(name = "department_id")
+	private String departmentId;
 
-    public String getTeacherId() { return teacherId; }
-    public void setTeacherId(String teacherId) { this.teacherId = teacherId; }
+	@Column(name = "department")
+	private String department;
 
-    public String getName() { return name; }
-    public void setName(String name) { this.name = name; }
+	@Column(name = "office")
+	private String office;
 
-    public String getGender() { return gender; }
-    public void setGender(String gender) { this.gender = gender; }
+	@Column(name = "phone")
+	private String phone;
 
-    public String getDepartmentId() { return departmentId; }
-    public void setDepartmentId(String departmentId) { this.departmentId = departmentId; }
+	@Column(name = "email")
+	private String email;
 
-    public String getTitle() { return title; }
-    public void setTitle(String title) { this.title = title; }
+	@Column(name = "hire_date")
+	private String hireDate;
 
-    public String getPhone() { return phone; }
-    public void setPhone(String phone) { this.phone = phone; }
+	@Column(name = "is_active")
+	private Boolean isActive = true;
 
-    public String getEmail() { return email; }
-    public void setEmail(String email) { this.email = email; }
+	// 构造方法
+	public Teacher() {
+	}
 
-    public String getOffice() { return office; }
-    public void setOffice(String office) { this.office = office; }
+	public String getTeacherId() {
+		return teacherId;
+	}
 
-    public Boolean getIsActive() { return isActive != null ? isActive : true; }
-    public void setIsActive(Boolean isActive) { this.isActive = isActive; }
+	public void setTeacherId(String teacherId) {
+		this.teacherId = teacherId;
+	}
+
+	public String getTeacherName() {
+		return teacherName;
+	}
+
+	public void setTeacherName(String teacherName) {
+		this.teacherName = teacherName;
+	}
+
+	public String getGender() {
+		return gender;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+
+	public String getBirthDate() {
+		return birthDate;
+	}
+
+	public void setBirthDate(String birthDate) {
+		this.birthDate = birthDate;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public String getDepartmentId() {
+		return departmentId;
+	}
+
+	public void setDepartmentId(String departmentId) {
+		this.departmentId = departmentId;
+	}
+
+	public String getDepartment() {
+		return department;
+	}
+
+	public void setDepartment(String department) {
+		this.department = department;
+	}
+
+	public String getOffice() {
+		return office;
+	}
+
+	public void setOffice(String office) {
+		this.office = office;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getHireDate() {
+		return hireDate;
+	}
+
+	public void setHireDate(String hireDate) {
+		this.hireDate = hireDate;
+	}
+
+	public Boolean getIsActive() {
+		return isActive;
+	}
+
+	public void setIsActive(Boolean isActive) {
+		this.isActive = isActive;
+	}
 }
