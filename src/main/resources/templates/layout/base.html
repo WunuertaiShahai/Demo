@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <title layout:title-pattern="$CONTENT_TITLE - $LAYOUT_TITLE">默认标题</title>
+    <!-- 全局样式和脚本 -->
+    <link rel="stylesheet" th:href="@{/css/global.css}">
+</head>
+<body>
+    <!-- 页头 -->
+    <header>
+        <h1>我的网站通用头部</h1>
+        <nav><!-- 导航菜单 --></nav>
+    </header>
+
+    <!-- 主内容区 - 这是子页面内容注入的地方 -->
+    <main layout:fragment="content">
+        <p>默认内容。如果子页面未覆盖，则会显示此内容。</p>
+    </main>
+
+    <!-- 页脚 -->
+    <footer>
+        <p>&copy; 2026 我的网站</p>
+    </footer>
+
+    <!-- 全局脚本 -->
+    <script th:src="@{/js/global.js}"></script>
+    <!-- 子页面特定的脚本会在这里被引入 -->
+    <div layout:fragment="scripts"></div>
+</body>
+</html>
