@@ -115,7 +115,7 @@ public class StudentController {
 		/* return "management/add_student :: #student_id"; */
 	}
 
-	@PostMapping("/management/add")
+	@PostMapping("/management/addStudent")
 	public String addStudent(@RequestParam Map<String, Object> studentData, Model model) {
 		boolean success = studentService.addStudent(studentData);
 		if (success) {

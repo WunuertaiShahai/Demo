@@ -177,7 +177,7 @@ document.addEventListener('DOMContentLoaded', function() {
         event.preventDefault(); // 阻止表单默认提交（即页面跳转）
         
         $.ajax({
-            url: '/student/management/add',
+            url: '/student/management/addStudent',
             type: 'POST',
             data: $(this).serialize(),
             success: function(response) {

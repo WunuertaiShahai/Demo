@@ -1,7 +1,7 @@
 package com.example.Demo.dto;
 
 public class CourseDto {
-	private String courseCode;
+	private String courseId;
 	private String courseName;
 	private Integer credits;
 	private Integer hours;
@@ -11,15 +11,6 @@ public class CourseDto {
 
 	// 构造方法
 	public CourseDto() {
-	}
-
-	// Getter和Setter方法
-	public String getCourseCode() {
-		return courseCode;
-	}
-
-	public void setCourseCode(String courseCode) {
-		this.courseCode = courseCode;
 	}
 
 	public String getCourseName() {
@@ -68,5 +59,13 @@ public class CourseDto {
 
 	public void setIsActive(String isActive) {
 		this.isActive = isActive;
+	}
+
+	public String getCourseId() {
+		return courseId;
+	}
+
+	public void setCourseId(String courseId) {
+		this.courseId = courseId;
 	}
 }

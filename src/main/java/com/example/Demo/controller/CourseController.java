@@ -29,6 +29,9 @@ public class CourseController {
 	@GetMapping("/management/schedule")
 	public String showCourseScheduleForm(Model model) {
 		model.addAttribute("pageTitle", "课程安排");
+		model.addAttribute("courses", courseService.getCourseList());
+		model.addAttribute("classes", courseService.getClassList());
+		model.addAttribute("teachers", courseService.getTeacherList());
 		model.addAttribute("schedules", courseService.getCourseScheduleList());
 		return "management/course_schedule";
 	}

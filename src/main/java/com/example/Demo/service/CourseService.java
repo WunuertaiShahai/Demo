@@ -14,13 +14,24 @@ public class CourseService {
 	private JdbcTemplate jdbcTemplate;
 
 	public List<Map<String, Object>> getCourseList() {
-		String sql = "SELECT c.*, t.name as teacher_name FROM course c LEFT JOIN teacher t ON c.teacher_id = t.teacher_id";
+		String sql = "SELECT c.* FROM course c";
+		return jdbcTemplate.queryForList(sql);
+	}
+
+	public List<Map<String, Object>> getClassList() {
+		String sql = "SELECT c.class_id, c.class_name FROM class c";
+		return jdbcTemplate.queryForList(sql);
+	}
+
+	public List<Map<String, Object>> getTeacherList() {
+		String sql = "SELECT t.teacher_id, t.teacher_name FROM teacher t";
 		return jdbcTemplate.queryForList(sql);
 	}
 
 	public List<Map<String, Object>> getCourseScheduleList() {
-		String sql = "SELECT cs.*, c.course_name, cls.class_name, t.name as teacher_name " + "FROM course_schedule cs "
-				+ "LEFT JOIN course c ON cs.course_id = c.id " + "LEFT JOIN class cls ON cs.class_id = cls.id "
+		String sql = "SELECT cs.*, c.course_name, cls.class_name, t.teacher_name AS teacher_name "
+				+ "FROM course_schedule cs " + "LEFT JOIN course c ON cs.course_id = c.course_id "
+				+ "LEFT JOIN class cls ON cs.class_id = cls.class_id "
 				+ "LEFT JOIN teacher t ON cs.teacher_id = t.teacher_id " + "ORDER BY cs.day_of_week, cs.start_time";
 		return jdbcTemplate.queryForList(sql);
 	}

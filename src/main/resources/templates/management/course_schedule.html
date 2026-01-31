@@ -21,6 +21,9 @@
             padding-left: 1rem;
             margin-bottom: 1rem;
         }
+        .courese-card{
+            background: rgba(20, 255, 255, 0.1);
+        }
     </style>
 </head>
 <body>
@@ -41,35 +44,35 @@
         </div>
 
         <div class="row">
-            <div class="col-md-5">
+            <div class="col-md-6">
                 <div class="form-container">
                     <h5>安排新课程</h5>
                     <form th:action="@{/management/course/schedule}" method="post">
                         <div class="mb-3">
                             <label class="form-label">课程</label>
-                            <select class="form-select" name="course_id" required>
-                                <option value="1">数据库基础</option>
-                                <option value="2">Java编程</option>
-                                <option value="3">Web开发</option>
-                            </select>
+                            <input class="form-control" list="courseOptions" id="courseInput" name="course" placeholder="输入课程名称进行搜索..." autocomplete="off">
+                            <datalist id="courseOptions">
+                                <!-- 使用Thymeleaf动态遍历课程列表 -->
+                                <option class="form-control" th:each="course : ${courses}" th:value="${course.course_id}" th:text="${course.course_name}"></option>
+                            </datalist>
                         </div>
                         
                         <div class="mb-3">
                             <label class="form-label">班级</label>
-                            <select class="form-select" name="class_id" required>
-                                <option value="1">计算机科学与技术2021级1班</option>
-                                <option value="2">软件工程2021级1班</option>
-                                <option value="3">网络工程2021级1班</option>
-                            </select>
+                            <input class="form-control" list="classOptions" id="classInput" name="class" placeholder="输入班级名称进行搜索..." autocomplete="off">
+                            <datalist id="classOptions">
+                                <!-- 使用Thymeleaf动态遍历课程列表 -->
+                                <option class="form-control" th:each="class : ${classes}" th:value="${class.class_id}" th:text="${class.class_name}"></option>
+                            </datalist>
                         </div>
                         
                         <div class="mb-3">
                             <label class="form-label">授课教师</label>
-                            <select class="form-select" name="teacher_id" required>
-                                <option value="1">张教授</option>
-                                <option value="2">李教授</option>
-                                <option value="3">王教授</option>
-                            </select>
+                            <input class="form-control" list="teacherOptions" id="teacherInput" name="teacher" placeholder="输入老师名称进行搜索..." autocomplete="off">
+                            <datalist id="teacherOptions">
+                                <!-- 使用Thymeleaf动态遍历课程列表 -->
+                                <option class="form-control" th:each="teacher : ${teachers}" th:value="${teacher.teacher_id}" th:text="${teacher.teacher_name}"></option>
+                            </datalist>
                         </div>
                         
                         <div class="mb-3">
@@ -120,14 +123,16 @@
                 </div>
             </div>
             
-            <div class="col-md-7">
-                <div class="card">
+            <div class="col-md-6">
+                <div class="card courese-card">
                     <div class="card-header">
                         <h5 class="card-title mb-0">当前课程安排</h5>
                     </div>
                     <div class="card-body">
                         <div th:each="schedule : ${schedules}" class="schedule-item">
-                            <h6 th:text="${schedule.course_name} + ' - ' + ${schedule.class_name}">数据库基础 - 计算机科学与技术2021级1班</h6>
+                            <p class="mb-3">
+                                <strong><span th:text="${schedule.course_name}">数据库基础</span></strong>
+                            </p>
                             <p class="mb-1">
                                 <strong>教师:</strong> <span th:text="${schedule.teacher_name}">张教授</span> | 
                                 <strong>教室:</strong> <span th:text="${schedule.classroom}">教学楼A101</span>
@@ -136,13 +141,16 @@
                                 <strong>时间:</strong> 星期<span th:text="${schedule.day_of_week}">一</span> 
                                 <span th:text="${schedule.start_time}">08:00:00</span>-<span th:text="${schedule.end_time}">09:40:00</span>
                             </p>
-                            <p class="mb-0">
-                                <strong>学期:</strong> <span th:text="${schedule.semester}">2024春季</span> | 
-                                <strong>学年:</strong> <span th:text="${schedule.academic_year}">2023-2024</span>
+                            <p class="mb-1">
+                                <strong>班级:</strong> <span th:text="${schedule.class_name}">计算机科学与技术2021级1班</span>
                             </p>
                         </div>
                     </div>
                 </div>
+                <video autoplay muted controls style="width: 400px; height: 600px;">
+                    <source th:src="@{/videos/nakade.mp4}" type="video/mp4">
+                    <!-- 其他格式备用源 -->
+                </video>
             </div>
         </div>
     </div>

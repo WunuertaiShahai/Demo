@@ -21,6 +21,19 @@
         .score-average { color: #ffc107; }
         .score-poor { color: #fd7e14; }
         .score-fail { color: #dc3545; font-weight: bold; }
+        .is-invalid {
+            border-color: #dc3545 !important; /* 红色边框 */
+            box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25) !important; /* 红色阴影光晕 */
+        }
+        /* 可选：有效状态的样式 */
+        .is-valid {
+            border-color: #28a745 !important;
+            box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25) !important;
+        }
+        .invalid-feedback {
+            color: #dc3545;
+            font-size: 0.875em;
+        }
     </style>
 </head>
 <body>
@@ -31,46 +44,50 @@
         </div>
 
         <!-- 消息提示 -->
-        <div th:if="${successMessage}" class="alert alert-success alert-dismissible fade show" role="alert">
+        <div th:if="${successMessage}" id="successMessage" class="alert alert-success alert-dismissible fade show" role="alert">
             <span th:text="${successMessage}"></span>
             <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
         </div>
-        <div th:if="${errorMessage}" class="alert alert-danger alert-dismissible fade show" role="alert">
+        <div th:if="${errorMessage}" id="errorMessage" name="errorMessage" class="alert alert-danger alert-dismissible fade show" role="alert">
             <span th:text="${errorMessage}"></span>
             <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
         </div>
 
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-6">
                 <div class="form-container">
                     <h5>录入新成绩</h5>
-                    <form th:action="@{/management/grade/entry}" method="post">
+                    <form th:action="@{/grade/management/addGrade}" method="post" id="gradeForm">
                         <div class="mb-3">
                             <label class="form-label">学号</label>
-                            <input type="text" class="form-control" name="student_id" required>
+                            <input type="text" class="form-control" id="student_id" name="student_id" required>
                         </div>
                         
                         <div class="mb-3">
                             <label class="form-label">课程</label>
-                            <select class="form-select" name="course_id" required>
-                                <option value="1">数据库基础</option>
-                                <option value="2">Java编程</option>
-                                <option value="3">Web开发</option>
-                            </select>
+                            <!--<select class="form-select" id="course" name="course" required>
+                                <option th:each="course : ${courses}" th:value="${course.course_id}" th:text="${course.course_name}"></option>
+                            </select>-->
+
+                            <!-- 使用 input 和 datalist 替代 select -->
+                            <input class="form-control" list="courseOptions" id="courseInput" name="course" placeholder="输入课程名称进行搜索..." autocomplete="off">
+                            <datalist id="courseOptions">
+                                <!-- 使用Thymeleaf动态遍历课程列表 -->
+                                <option class="form-control" th:each="course : ${courses}" th:value="${course.course_id}" th:text="${course.course_name}"></option>
+                            </datalist>
                         </div>
                         
                         <div class="mb-3">
                             <label class="form-label">成绩</label>
-                            <input type="number" class="form-control" name="score" min="0" max="100" step="0.1" required>
+                            <input type="text" id="score" class="form-control" pattern="^(100|[1-9]?[0-9])$"
+                                placeholder="请输入0-100之间的数字" oninput="validateScoreText(this)" value="0" required>
                         </div>
                         
                         <div class="mb-3">
                             <label class="form-label">考试类型</label>
                             <select class="form-select" name="exam_type" required>
-                                <option value="期中">期中考试</option>
-                                <option value="期末">期末考试</option>
-                                <option value="平时">平时成绩</option>
-                                <option value="测验">小测验</option>
+                                <option value="0">期中考试</option>
+                                <option value="1">期末考试</option>
                             </select>
                         </div>
                         
@@ -84,7 +101,7 @@
                 </div>
             </div>
             
-            <div class="col-md-8">
+            <div class="col-md-6">
                 <div class="card">
                     <div class="card-header">
                         <h5 class="card-title mb-0">最近成绩记录</h5>
@@ -98,8 +115,6 @@
                                         <th>姓名</th>
                                         <th>课程</th>
                                         <th>成绩</th>
-                                        <th>考试类型</th>
-                                        <th>考试日期</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -108,8 +123,6 @@
                                         <td th:text="${grade.student_name}">张三</td>
                                         <td th:text="${grade.course_name}">数据库基础</td>
                                         <td th:text="${grade.score}">85.5</td>
-                                        <td th:text="${grade.exam_type}">期中</td>
-                                        <td th:text="${#dates.format(grade.exam_date, 'yyyy-MM-dd')}">2024-03-15</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -121,7 +134,9 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script th:src="@{/js/grade.js}"></script>  <!-- 先加载grade.js -->
     <script th:src="@{/js/common.js}"></script>
+    <script th:src="@{/js/jquery.min.js}"></script>  <!-- 后加载jQuery -->
     <script>
         function showDashboard() {
             window.location.href = '/dashboard';
@@ -133,5 +148,8 @@
             document.querySelector('input[name="exam_date"]').value = today;
         });
     </script>
+    
+    
+    
 </body>
 </html>

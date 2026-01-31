@@ -34,21 +34,17 @@
                             <tr>
                                 <th>课程ID</th>
                                 <th>课程名</th>
-                                <th>学院</th>
                                 <th>学分</th>
                                 <th>分类</th>
-                                <th>授课老师</th>
                                 <th>操作</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr th:each="course : ${courses}">
-                                <td th:text="${course.course_code}">CS029</td>
+                                <td th:text="${course.course_id}">CS029</td>
                                 <td th:text="${course.course_name}">数据库基础</td>
-                                <td th:text="${course.department}">计算机学院</td>
                                 <td th:text="${course.credits}">4</td>
                                 <td th:text="${course.course_type}">专业基础课</td>
-                                <td th:text="${course.teacher_name}">张教授</td>
                                 <td>
                                     <button class="btn btn-sm btn-outline-primary">查看详情</button>
                                 </td>
